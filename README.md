@@ -39,4 +39,5 @@ Scheduler of learning rate used in `train.py`.
 ## Results (WIP)
 |Ground Truth|Generation|
 |---|---|
-|![ground_truth](https://user-images.githubusercontent.com/24241353/49865725-100aa180-fe49-11e8-9ae4-cd9ed54a6bc2.png)|
+|![ground_truth](https://user-images.githubusercontent.com/24241353/49865725-100aa180-fe49-11e8-9ae4-cd9ed54a6bc2.png)|![generation](https://user-images.githubusercontent.com/24241353/49865970-bb1b5b00-fe49-11e8-9ce3-264476022045.png)|
+
