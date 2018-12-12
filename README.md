@@ -1,4 +1,10 @@
-# Neural scene representation and rendering (Eslami, et al., 2018)
+# PyTorch implementation of Generative Query Network
+### Original Paper: Neural scene representation and rendering (Eslami, et al., 2018)
+#### https://deepmind.com/blog/neural-scene-representation-and-rendering
+#### http://science.sciencemag.org/content/360/6394/1204.full?ijkey=kGcNflzOLiIKQ&keytype=ref&siteid=sci
+
+### Dataset
+#### https://github.com/deepmind/gqn-datasets
 ![img](https://storage.googleapis.com/deepmind-live-cms/images/model.width-1100.png)
 
 ## Requirement
@@ -10,11 +16,14 @@
 ```
 python train.py --train_data_dir /path/to/dataset/train --test_data_dir /path/to/dataset/test
 
-# if you use multiple GPUs
+# Using multiple GPUs.
 python train.py --device_ids 0 1 2 3 --train_data_dir /path/to/dataset/train --test_data_dir /path/to/dataset/test
 ```
 
 ## Usage
+### dataset/convert2torch.py
+Convert TFRecord of datasets for PyTorch implementation.
+
 ### representation.py
 Representation networks (See Figure S1 in Supplementary Materials of the paper).
 
