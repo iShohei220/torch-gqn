@@ -6,7 +6,7 @@
 
 ## Requirement
 - Python >=3.6
-- Pytorch
+- PyTorch
 - TensorBoardX
 
 ## How to Train
