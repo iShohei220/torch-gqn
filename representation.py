@@ -15,7 +15,6 @@ class Pyramid(nn.Module):
             nn.Conv2d(128, 256, kernel_size=8, stride=8),
             nn.ReLU()
         )
-        
 
     def forward(self, x, v):
         # Broadcast
