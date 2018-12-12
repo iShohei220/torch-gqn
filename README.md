@@ -4,7 +4,7 @@
 
 ![img](https://storage.googleapis.com/deepmind-live-cms/images/model.width-1100.png)
 
-### Pixyz Implementation: https://github.com/masa-su/pixyzoo/tree/master/GQN
+#### Pixyz Implementation: https://github.com/masa-su/pixyzoo/tree/master/GQN
 
 ## Requirement
 - Python >=3.6
