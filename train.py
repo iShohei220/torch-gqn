@@ -29,7 +29,7 @@ if __name__ == '__main__':
     parser.add_argument('--device_ids', type=int, nargs='+', help='list of CUDA devices (default: [0])', default=[0])
     parser.add_argument('--representation', type=str, help='representation network (default: pool)', default='pool')
     parser.add_argument('--layers', type=int, help='number of generative layers (default: 12)', default=12)
-    parser.add_argument('--share_core', type=bool, \
+    parser.add_argument('--shared_core', type=bool, \
                         help='whether to share the weights of the cores across generation steps (default: False)', \
                         default=False)
     parser.add_argument('--seed', type=int, help='random seed (default: None)', default=None)
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     S_max = args.gradient_steps
 
     # Define model
-    model = GQN(L=L).to(device)
+    model = GQN(representation=args.representation, L=L, shared_core=args.shared_core).to(device)
     if len(args.device_ids)>1:
         model = nn.DataParallel(model, device_ids=args.device_ids)
 

@@ -1,6 +1,8 @@
 import torch
 from torch import nn
 from torch.nn import functional as F
+from torch.distributions import Normal
+from torch.distributions.kl import kl_divergence
 from representation import Pyramid, Tower, Pool
 from core import InferenceCore, GenerationCore
     
@@ -28,6 +30,10 @@ class GQN(nn.Module):
         else:
             self.inference_core = nn.ModuleList([InferenceCore() for _ in range(L)])
             self.generation_core = nn.ModuleList([GenerationCore() for _ in range(L)])
+            
+        self.eta_pi = nn.Conv2d(128, 2*3, kernel_size=5, stride=1, padding=2)
+        self.eta_g = nn.Conv2d(128, 3, kernel_size=1, stride=1, padding=0)
+        self.eta_e = nn.Conv2d(128, 2*3, kernel_size=5, stride=1, padding=2)
 
     # EstimateELBO
     def forward(self, x, v, v_q, x_q, sigma):
@@ -74,9 +80,9 @@ class GQN(nn.Module):
             
             # Generator state update
             if self.shared_core:
-                c_g, h_g, u = self.generator_core(v_q, r, c_g, h_g, u, z)
+                c_g, h_g, u = self.generation_core(v_q, r, c_g, h_g, u, z)
             else:
-                c_g, h_g, u = self.generator_core[l](v_q, r, c_g, h_g, u, z)
+                c_g, h_g, u = self.generation_core[l](v_q, r, c_g, h_g, u, z)
                 
             # ELBO KL contribution update
             elbo -= torch.sum(kl_divergence(q, pi), dim=[1,2,3])
@@ -114,9 +120,9 @@ class GQN(nn.Module):
             
             # State update
             if self.shared_core:
-                c_g, h_g, u = self.generator_core(v_q, r, c_g, h_g, u, z)
+                c_g, h_g, u = self.generation_core(v_q, r, c_g, h_g, u, z)
             else:
-                c_g, h_g, u = self.generator_core[l](v_q, r, c_g, h_g, u, z)
+                c_g, h_g, u = self.generation_core[l](v_q, r, c_g, h_g, u, z)
             
         # Image sample
         mu = self.eta_g(u)
@@ -167,9 +173,9 @@ class GQN(nn.Module):
             
             # Generator state update
             if self.shared_core:
-                c_g, h_g, u = self.generator_core(v_q, r, c_g, h_g, u, z)
+                c_g, h_g, u = self.generation_core(v_q, r, c_g, h_g, u, z)
             else:
-                c_g, h_g, u = self.generator_core[l](v_q, r, c_g, h_g, u, z)
+                c_g, h_g, u = self.generation_core[l](v_q, r, c_g, h_g, u, z)
                 
             # ELBO KL contribution update
             kl += torch.sum(kl_divergence(q, pi), dim=[1,2,3])
@@ -214,9 +220,9 @@ class GQN(nn.Module):
             
             # Generator state update
             if self.shared_core:
-                c_g, h_g, u = self.generator_core(v_q, r, c_g, h_g, u, z)
+                c_g, h_g, u = self.generation_core(v_q, r, c_g, h_g, u, z)
             else:
-                c_g, h_g, u = self.generator_core[l](v_q, r, c_g, h_g, u, z)
+                c_g, h_g, u = self.generation_core[l](v_q, r, c_g, h_g, u, z)
                 
         mu = self.eta_g(u)
 

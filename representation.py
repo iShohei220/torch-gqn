@@ -15,11 +15,12 @@ class Pyramid(nn.Module):
             nn.Conv2d(128, 256, kernel_size=8, stride=8),
             nn.ReLU()
         )
+        
 
     def forward(self, x, v):
         # Broadcast
         v = v.view(-1, 7, 1, 1).repeat(1, 1, 64, 64)
-        r = self.net(torch.cat((v, x)))
+        r = self.net(torch.cat((v, x), dim=1))
         
         return r
     
