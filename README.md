@@ -6,7 +6,7 @@
 
 #### Pixyz Implementation: https://github.com/masa-su/pixyzoo/tree/master/GQN
 
-## Requirement
+## Requirements
 - Python >=3.6
 - PyTorch
 - TensorBoardX
@@ -24,7 +24,7 @@ python train.py --device_ids 0 1 2 3 --train_data_dir /path/to/dataset/train --t
 
 ## Usage
 ### dataset/convert2torch.py
-Convert TFRecord of datasets for PyTorch implementation.
+Convert TFRecords of the dataset for PyTorch implementation.
 
 ### representation.py
 Representation networks (See Figure S1 in Supplementary Materials of the paper).
