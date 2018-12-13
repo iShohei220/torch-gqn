@@ -20,7 +20,7 @@ python train.py --device_ids 0 1 2 3 --train_data_dir /path/to/dataset/train --t
 ```
 ### ❗️❗️CAUTION❗️❗️
 #### This implementation needs very high computational power because of enormous number of parameters.
-The default setting is based on the setting on the original GQN paper (In the paper, **4x GPUs with 24GB memory** are used in the experiments).
+The default setting is based on the original GQN paper (In the paper, **4x GPUs with 24GB memory** are used in the experiments).
 If you have only limited GPU memory, I recommend to use the option of **`--shared_core True`** (default: False) or **`--layers 8`** (default 12) to reduce parameters.
 As far as I experimented, this change would not affect the quality of results so much, although the setting would be different with the original paper.
 #### https://github.com/iShohei220/torch-gqn/issues/1
